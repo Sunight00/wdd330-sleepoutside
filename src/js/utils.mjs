@@ -15,9 +15,49 @@ export function setLocalStorage(key, data) {
 }
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
+  qs(selector).addEventListener('touchend', (event) => {
     event.preventDefault();
     callback();
   });
-  qs(selector).addEventListener("click", callback);
+  qs(selector).addEventListener('click', callback);
 }
+
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get(param);
+  return product;
+}
+
+
+//This populates the string literal template
+export function renderListWithTemplate(template, parentElement, list, position = 'beforeend', clear = true){
+  const htmlStrings = list.map(lists => template(lists));
+  if (clear){
+    parentElement.innerHTML = '';
+  }
+   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
+}
+
+
+/*
+
+function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get(param);
+  return product;
+};  
+var param = getParam('product'); 
+console.log(param)
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams;
+  console.log(product);
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get('product');
+  console.log(product);
+*/

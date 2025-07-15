@@ -1,20 +1,17 @@
-
-import { setLocalStorage } from './utils.mjs';
-import ProductData from './ProductData.mjs';
-import { getParam } from './utils.mjs';
-import productDetail from './ProductDetails.mjs';
-
+import { setLocalStorage } from "./utils.mjs";
+import ProductData from "./ProductData.mjs";
+import { getParam } from "./utils.mjs";
+import productDetail from "./ProductDetails.mjs";
 
 // An object created from the ProductDetails class that will be used to add products to the cart
 
-const dataSource = new ProductData('tents');
-const productId = getParam('product')
+const dataSource = new ProductData("tents");
+const productId = getParam("product");
 // eslint-disable-next-line no-undef
 //const product = await dataSource.findProductById(productId)
 /*setLocalStorage(productId,product);*/
 const productDetails = new productDetail(productId, dataSource);
-productDetails.init(productId,dataSource);
-
+productDetails.init(productId, dataSource);
 
 function addProductToCart(product) {
   let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
@@ -34,8 +31,6 @@ async function addToCartHandler(e) {
 document
   .getElementById("addToCart")
   .addEventListener("click", addToCartHandler);
-
-
 
 //THE INTIAL DEBUGGED ADDPRODUCTTOCART FUNCTION
 /*

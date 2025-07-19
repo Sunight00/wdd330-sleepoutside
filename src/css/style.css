@@ -261,3 +261,23 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+
+
+
+.categories{  
+  margin-top: 2rem;
+  display: flex;
+  text-align: center
+
+}
+
+.categories img{
+  width: 10%;
+  height: auto;
+}
+
+.categories a{
+  text-decoration: none;
+}
+

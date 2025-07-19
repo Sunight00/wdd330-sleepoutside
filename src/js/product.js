@@ -5,13 +5,16 @@ import productDetail from "./ProductDetails.mjs";
 
 // An object created from the ProductDetails class that will be used to add products to the cart
 
-const dataSource = new ProductData("tents");
+const data = new ProductData();
+const dataSource = data.getData();
 const productId = getParam("product");
+
 // eslint-disable-next-line no-undef
 //const product = await dataSource.findProductById(productId)
 /*setLocalStorage(productId,product);*/
-const productDetails = new productDetail(productId, dataSource);
-productDetails.init(productId, dataSource);
+const productDetails = new productDetail(productId,dataSource);
+
+productDetails.init();
 
 function addProductToCart(product) {
   let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];

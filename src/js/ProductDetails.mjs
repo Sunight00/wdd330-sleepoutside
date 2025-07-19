@@ -1,3 +1,4 @@
+const baseURL = import.meta.env.VITE_SERVER_URL
 import { setLocalStorage, getLocalStorage } from './utils.mjs';
 
 export default class productDetail{
@@ -9,25 +10,28 @@ export default class productDetail{
 
     async init(){
         // eslint-disable-next-line no-undef
-        this.product = await this.dataSource.findProductById(this.productId);
+        //this.product = await this.dataSource.findProductById(this.productId);
+        const rawData =  `${baseURL}product/${this.productId}`;
+        const data = await fetch(rawData);
+        this.product  = await data.json();
+
+
 
        this.renderProductDetails();
         document
       .getElementById('addToCart')
-      .addEventListener('click', this.addProductToCart.bind(this));
+      .addEventListener('click', this.addProductToCart.bind(this.product));
 
     }
     
-    addProductToCart() {
-     {
-        if (localStorage.getItem(this.productId) !== null) {
-            setLocalStorage(this.productId, this.product);
-        }   
-        else {
-            setLocalStorage(this.productId, this.product);
-        }
-        }
-    }
+ addProductToCart(product) {
+  let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
+  if (!Array.isArray(cartItems) && cartItems !== null) {
+    cartItems = [cartItems];
+  }
+  cartItems.push(product);
+  setLocalStorage("so-cart", cartItems);
+}
 
     renderProductDetails() {
         productDetailsTemplate(this.product);
@@ -38,17 +42,18 @@ export default class productDetail{
 
 
 function productDetailsTemplate(product) {
-    
-  document.querySelector('h2').textContent = product.Brand.Name;
-  document.querySelector('h3').textContent = product.NameWithoutBrand;
+
+    document.querySelector('#q').textContent = product.Result.Id;
+  document.querySelector('h2').textContent = product.Result.Name;
+  document.querySelector('h3').textContent = product.Result.NameWithoutBrand;
 
   const productImage = document.querySelector('.productImage');
-  productImage.src = product.Image;
-  productImage.alt = product.NameWithoutBrand;
+  productImage.src = product.Result.Images.PrimaryLarge;
+  productImage.alt = product.Result.NameWithoutBrand;
 
-  document.querySelector('.productPrice').textContent = product.FinalPrice;
-  document.querySelector('.productColor').textContent = product.Colors[0].ColorName;
-  document.querySelector('.productDesc').innerHTML = product.DescriptionHtmlSimple;
+  document.querySelector('.productPrice').textContent = product.Result.FinalPrice;
+  document.querySelector('.productColor').textContent = product.Result.Colors?.[0]?.ColorName;
+  document.querySelector('.productDesc').innerHTML = product.Result.DescriptionHtmlSimple;
 
 }
 

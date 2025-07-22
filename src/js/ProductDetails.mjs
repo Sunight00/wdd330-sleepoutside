@@ -20,19 +20,32 @@ export default class productDetail{
        this.renderProductDetails();
         document
       .getElementById('addToCart')
-      .addEventListener('click', this.addProductToCart.bind(this.product));
+      //.addEventListener('click', this.addProductToCart.bind(this.product));
+      .addEventListener('click', ()=>{
+        let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
+  if (!Array.isArray(cartItems) && cartItems !== null) {
+    cartItems = [cartItems];
+  }
+  cartItems.push(this.product);
+  setLocalStorage("so-cart", cartItems);
+
+
+      });
 
     }
-    
- addProductToCart(product) {
+
+
+ /*addProductToCart(product) {
   let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
   if (!Array.isArray(cartItems) && cartItems !== null) {
     cartItems = [cartItems];
   }
   cartItems.push(product);
   setLocalStorage("so-cart", cartItems);
+  //document.getElementById('q').textContent = ;
+  
 }
-
+*/
     renderProductDetails() {
         productDetailsTemplate(this.product);
         }

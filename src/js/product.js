@@ -15,7 +15,7 @@ const productId = getParam("product");
 const productDetails = new productDetail(productId,dataSource);
 
 productDetails.init();
-
+/*
 function addProductToCart(product) {
   let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
   if (!Array.isArray(cartItems) && cartItems !== null) {
@@ -25,12 +25,14 @@ function addProductToCart(product) {
   setLocalStorage("so-cart", cartItems);
 }
 // add to cart button event handler
+
 async function addToCartHandler(e) {
   const product = await dataSource.findProductById(productId);
   addProductToCart(product);
-}
+}*/
 
 // add listener to Add to Cart button
+/*
 document
   .getElementById("addToCart")
   .addEventListener("click", addToCartHandler);

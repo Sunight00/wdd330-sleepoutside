@@ -15,6 +15,9 @@ const productId = getParam("product");
 const productDetails = new productDetail(productId,dataSource);
 
 productDetails.init();
+
+
+
 /*
 function addProductToCart(product) {
   let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];

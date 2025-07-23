@@ -281,3 +281,19 @@ footer {
   text-decoration: none;
 }
 
+
+
+
+
+
+#mycart{
+  display: inline;
+}
+
+#total{
+  display: inline;
+  float: right;
+}
+.required{
+  color: red;
+}

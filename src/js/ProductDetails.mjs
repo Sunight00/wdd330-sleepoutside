@@ -56,7 +56,7 @@ export default class productDetail{
 
 function productDetailsTemplate(product) {
 
-    document.querySelector('#q').textContent = product.Result.Id;
+    //document.querySelector('#q').textContent = product.Result.Id;
   document.querySelector('h2').textContent = product.Result.Name;
   document.querySelector('h3').textContent = product.Result.NameWithoutBrand;
 

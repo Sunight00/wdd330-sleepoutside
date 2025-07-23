@@ -9,6 +9,7 @@
     <title>Sleep Outside | Checkout</title>
 
     <link rel="stylesheet" href="/css/style.css" />
+    <script type="module" src="/js/main.js">ca</script>
 
   </head>
 
@@ -89,7 +90,7 @@
         .map((item) => item.Result.FinalPrice)
         .reduce((sum, price) => sum + price, 0);
 
-        document.querySelector('.tfig').innerHTML = `$${total.toFixed(2)}`;
+       // document.querySelector('.tfig').innerHTML = `$${total.toFixed(2)}`;
     </script>
     <footer>&copy;NOT a real business</footer>
   </body>

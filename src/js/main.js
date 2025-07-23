@@ -16,3 +16,9 @@ loadHeaderFooter();
 //const pro = list.map(product => productCardTemplate(product)).join('');
 
 //document.querySelector('#h').innerHTML = pro;
+import CheckoutProcess from './CheckoutProcess.mjs'
+
+
+const n = new CheckoutProcess('so-cart','s')
+n.calculateItemSubTotal()
+

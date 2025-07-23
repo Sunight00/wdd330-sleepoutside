@@ -1,3 +1,4 @@
+import {getLocalStorage} from './utils.mjs'
 export default class CheckoutProcess {
   constructor(key, outputSelector) {
     this.key = key;
@@ -15,13 +16,17 @@ export default class CheckoutProcess {
   }
 
   calculateItemSubTotal() {
-    // calculate and display the total dollar amount of the items in the cart, and the number of items.
-    
+      this.list = JSON.parse(localStorage.getItem(this.key)) || [];
+
+      this.itemTotal = this.list
+        .map((item) => item.Result.FinalPrice)
+        .reduce((sum, price) => sum + price, 0);
+        document.querySelector('.tfig').innerHTML = `$${this.itemTotal.toFixed(2)}`;
   }
 
   calculateOrderTotal() {
     // calculate the tax and shipping amounts. Add those to the cart total to figure out the order total
-    this.tax = (this.itemTotal ...)
+    this.tax = (this.itemTotal)
     this.shipping =
     this.orderTotal =
 

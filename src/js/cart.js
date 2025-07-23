@@ -6,6 +6,15 @@ function renderCartContents() {
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
 
+const cat = JSON.parse(localStorage.getItem("so-cart")) || [];
+
+const total = cat
+  .map((item) => item.Result.FinalPrice)
+  .reduce((sum, price) => sum + price, 0);
+
+document.querySelector('.tfig').innerHTML = `$${total.toFixed(2)}`;
+
+
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
@@ -27,10 +36,3 @@ function cartItemTemplate(item) {
 
 renderCartContents();
 
-const cat = JSON.parse(localStorage.getItem("so-cart")) || [];
-
-const total = cat
-  .map((item) => item.Result.FinalPrice)
-  .reduce((sum, price) => sum + price, 0);
-
-document.querySelector('.tfig').innerHTML = `$${total.toFixed(2)}`;

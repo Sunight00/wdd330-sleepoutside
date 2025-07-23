@@ -1,11 +1,11 @@
 import { setLocalStorage } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ProductData.mjs";
 import  getParam  from "./utils.mjs";
 import productDetail from "./ProductDetails.mjs";
 
 // An object created from the ProductDetails class that will be used to add products to the cart
 
-const data = new ProductData();
+const data = new ExternalServices();
 const dataSource = data.getData();
 const productId = getParam("product");
 

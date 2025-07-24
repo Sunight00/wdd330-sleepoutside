@@ -129,7 +129,7 @@ console.log(queryObject);
     const x = fetch(`${baseURL}checkout/`, options)
     
     return x
-    //await fetch(`${baseURL}checkout/`, options).then(convertToJson);
+    //.await fetch(`${baseURL}checkout/`, options).then(convertToJson);
   }
 
 }

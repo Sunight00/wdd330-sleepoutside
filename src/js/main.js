@@ -19,6 +19,6 @@ loadHeaderFooter();
 import CheckoutProcess from './CheckoutProcess.mjs'
 
 
-const n = new CheckoutProcess('so-cart','s')
+const n = new CheckoutProcess('so-cart','.summary')
 n.calculateItemSubTotal()
-
+n.calculateOrderTotal()

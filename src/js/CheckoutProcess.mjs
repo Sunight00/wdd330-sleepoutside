@@ -1,13 +1,7 @@
 import {getLocalStorage} from './utils.mjs'
 import ExternalServices from './ProductData.mjs';
+const baseURL = import.meta.env.VITE_SERVER_URL
 
-function formDataToJSON(formElement) {
-
-
-
-
-  
-}
 
 function packageItems(key){
   const items = JSON.parse(localStorage.getItem(key)) || [];
@@ -40,6 +34,8 @@ export default class CheckoutProcess {
     this.list = getLocalStorage(this.key);
     this.calculateItemSubTotal();
     this.calculateOrderTotal()
+
+    this.checkout(this.setData())
   }
 
   calculateItemSubTotal() {
@@ -81,7 +77,7 @@ export default class CheckoutProcess {
   }
 
 
-    async checkout() {
+   /*async checkout() {
     const formElement = document.forms["checkout"];
     const order = formDataToJSON(formElement);
 
@@ -98,5 +94,42 @@ export default class CheckoutProcess {
     } catch (err) {
       console.log(err);
     }
+  }*/
+
+
+
+ setData(){
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const queryObject = {};
+
+  const now = new Date();
+  queryObject['orderDate'] = now;
+  for (const [key, value] of urlParams.entries()) {
+  queryObject[key] = value;
   }
+
+  queryObject['items'] = packageItems('so-cart');
+
+  queryObject['orderTotal'] = this.orderTotal;
+  queryObject['shipping'] = this.shipping;
+  queryObject['tax'] = this.tax;
+
+console.log(queryObject);
+}
+
+  async checkout(payload) {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
+    const x = fetch(`${baseURL}checkout/`, options)
+    
+    return x
+    //await fetch(`${baseURL}checkout/`, options).then(convertToJson);
+  }
+
 }

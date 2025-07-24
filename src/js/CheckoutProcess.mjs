@@ -1,5 +1,13 @@
 import {getLocalStorage} from './utils.mjs'
+import ExternalServices from './ProductData.mjs';
 
+function formDataToJSON(formElement) {
+
+
+
+
+  
+}
 
 function packageItems(key){
   const items = JSON.parse(localStorage.getItem(key)) || [];
@@ -69,9 +77,26 @@ export default class CheckoutProcess {
 
     tax.innerText = `$${this.tax.toFixed(2)}`;
     shipping.innerText = `$${this.shipping.toFixed(2)}`;
-    orderTotal.innerText = `$${this.orderTotal.toFixed(2)}`;
+    orderTotal.innerText = `$${this.orderTotal.toFixed(2)}`;  
+  }
 
 
-  
+    async checkout() {
+    const formElement = document.forms["checkout"];
+    const order = formDataToJSON(formElement);
+
+    order.orderDate = new Date().toISOString();
+    order.orderTotal = this.orderTotal;
+    order.tax = this.tax;
+    order.shipping = this.shipping;
+    order.items = packageItems(this.list);
+    //console.log(order);
+
+    try {
+      const response = await services.checkout(order);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
   }
 }

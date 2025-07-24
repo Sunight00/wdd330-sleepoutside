@@ -20,5 +20,4 @@ import CheckoutProcess from './CheckoutProcess.mjs'
 
 
 const n = new CheckoutProcess('so-cart','.summary')
-n.calculateItemSubTotal()
-n.calculateOrderTotal()
+n.init()

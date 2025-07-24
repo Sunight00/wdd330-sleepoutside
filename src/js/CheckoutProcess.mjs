@@ -17,10 +17,6 @@ function packageItems(key){
 
 
 
-
-
-
-
 export default class CheckoutProcess {
   constructor(key, outputSelector) {
     this.key = key;
@@ -34,7 +30,8 @@ export default class CheckoutProcess {
 
   init() {
     this.list = getLocalStorage(this.key);
-    this.calculateItemSummary();
+    this.calculateItemSubTotal();
+    this.calculateOrderTotal()
   }
 
   calculateItemSubTotal() {
@@ -44,6 +41,9 @@ export default class CheckoutProcess {
         .map((item) => item.Result.FinalPrice)
         .reduce((sum, price) => sum + price, 0);
         //document.querySelector('.t').innerHTML = `$${this.itemTotal.toFixed(2)}`;
+
+        document.querySelector(`${this.outputSelector} #num-items`).innerHTML = this.list.length
+
   
   }
 

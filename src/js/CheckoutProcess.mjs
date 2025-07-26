@@ -126,7 +126,7 @@ console.log(queryObject);
       },
       body: JSON.stringify(payload),
     };
-    const x = fetch(`${baseURL}checkout/`, options)
+    const x = await fetch(`${baseURL}checkout/`, options)
     
     return x
     //.await fetch(`${baseURL}checkout/`, options).then(convertToJson);

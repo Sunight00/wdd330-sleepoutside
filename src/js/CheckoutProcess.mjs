@@ -36,6 +36,7 @@ export default class CheckoutProcess {
     this.calculateOrderTotal()
 
     this.checkout(this.setData())
+    //document.getElementById('q').innerHTML = this.setData();
   }
 
   calculateItemSubTotal() {
@@ -104,18 +105,19 @@ export default class CheckoutProcess {
   const queryObject = {};
 
   const now = new Date();
-  queryObject['orderDate'] = now;
+  queryObject['orderDate'] = now.toISOString();
   for (const [key, value] of urlParams.entries()) {
   queryObject[key] = value;
   }
 
   queryObject['items'] = packageItems('so-cart');
 
-  queryObject['orderTotal'] = this.orderTotal;
+  queryObject['orderTotal'] = `${this.orderTotal}`;
   queryObject['shipping'] = this.shipping;
-  queryObject['tax'] = this.tax;
+  queryObject['tax'] = `${this.tax}`;
 
-console.log(queryObject);
+  console.log(queryObject);
+  return queryObject;
 }
 
   async checkout(payload) {
@@ -126,6 +128,7 @@ console.log(queryObject);
       },
       body: JSON.stringify(payload),
     };
+    console.log(options)
     const x = await fetch(`${baseURL}checkout/`, options)
     
     return x

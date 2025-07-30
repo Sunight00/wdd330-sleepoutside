@@ -35,8 +35,16 @@ export default class CheckoutProcess {
     this.calculateItemSubTotal();
     this.calculateOrderTotal()
 
-    this.checkout(this.setData())
+    //this.checkout(this.setData())
     //document.getElementById('q').innerHTML = this.setData();
+    document.querySelector('#checkoutSubmit').addEventListener('click', (e) => {
+    e.preventDefault();
+    const myForm = document.forms[0];
+    const chk_status = myForm.checkValidity();
+    myForm.reportValidity();
+    if(chk_status)
+    this.checkout(this.setData());
+  });
   }
 
   calculateItemSubTotal() {
@@ -136,3 +144,4 @@ export default class CheckoutProcess {
   }
 
 }
+
